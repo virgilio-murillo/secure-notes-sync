@@ -13,6 +13,19 @@ def _get_creds(cfg: dict) -> dict:
     return auth.authenticate(cfg)
 
 
+def _type_out(text: str) -> None:
+    """Simulate typing via OS keystroke injection."""
+    import platform, time as _t
+    _t.sleep(0.5)  # give user time to focus target field
+    if platform.system() == "Darwin":
+        # Escape for AppleScript
+        escaped = text.replace("\\", "\\\\").replace('"', '\\"')
+        subprocess.run(["osascript", "-e",
+            f'tell application "System Events" to keystroke "{escaped}"'], check=True)
+    else:
+        subprocess.run(["xdotool", "type", "--clearmodifiers", text], check=True)
+
+
 def _clipboard(text: str, seconds: int = 45) -> None:
     """Copy to clipboard, clear after timeout."""
     try:
@@ -84,7 +97,9 @@ def cmd_get(args: argparse.Namespace) -> None:
     val = store.get(remote, args.path)
     if val is None:
         sys.exit(f"Entry not found: {args.path}")
-    if args.clip:
+    if args.type:
+        _type_out(val.split("\n")[0])
+    elif args.clip:
         _clipboard(val.split("\n")[0])
     else:
         print(val)
@@ -259,6 +274,7 @@ def main() -> None:
     g = sub.add_parser("get", help="Get an entry")
     g.add_argument("path", help="Entry path (e.g. email/gmail)")
     g.add_argument("-c", "--clip", action="store_true", help="Copy to clipboard")
+    g.add_argument("-t", "--type", action="store_true", help="Type it out (simulate keystrokes)")
 
     a = sub.add_parser("add", help="Add/update an entry")
     a.add_argument("path", help="Entry path")

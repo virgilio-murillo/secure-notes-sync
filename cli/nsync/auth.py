@@ -16,9 +16,19 @@ def authenticate(cfg: dict, totp_code: str | None = None) -> dict:
     """Authenticate and return temporary AWS credentials.
 
     Tries refresh token first (silent). Falls back to SRP + TOTP.
+    On untrusted devices, refresh token expires after 1 hour.
     Returns dict with AccessKeyId, SecretKey, SessionToken.
     """
-    # Try refresh token first (no TOTP needed — "once in a lifetime")
+    import time
+
+    # On untrusted devices, enforce 1-hour session window
+    if not cfg.get("trusted") and cfg.get("auth_timestamp"):
+        elapsed = time.time() - cfg["auth_timestamp"]
+        if elapsed > 3600:
+            cfg["refresh_token"] = ""
+            config.save(cfg)
+
+    # Try refresh token first (no TOTP needed)
     if cfg.get("refresh_token"):
         try:
             return _refresh_auth(cfg)
@@ -31,8 +41,9 @@ def authenticate(cfg: dict, totp_code: str | None = None) -> dict:
 
     tokens = _srp_auth(cfg, totp_code)
 
-    # Cache refresh token
+    # Cache refresh token + timestamp
     cfg["refresh_token"] = tokens["refresh_token"]
+    cfg["auth_timestamp"] = time.time()
     config.save(cfg)
 
     return _get_credentials(cfg, tokens["id_token"])
@@ -93,6 +104,10 @@ def _refresh_auth(cfg: dict) -> dict:
         ClientId=cfg["client_id"],
     )
     id_token = resp["AuthenticationResult"]["IdToken"]
+    # Update refresh token if a new one was issued
+    if "RefreshToken" in resp["AuthenticationResult"]:
+        cfg["refresh_token"] = resp["AuthenticationResult"]["RefreshToken"]
+        config.save(cfg)
     return _get_credentials(cfg, id_token)
 
 
