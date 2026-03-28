@@ -1,0 +1,98 @@
+{
+  "/ConfigSyncStack/IdentityPool": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IdentityPool"
+    }
+  ],
+  "/ConfigSyncStack/RoleAttachment": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RoleAttachment"
+    }
+  ],
+  "/ConfigSyncStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    }
+  ],
+  "/ConfigSyncStack/ClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ClientId"
+    }
+  ],
+  "/ConfigSyncStack/IdentityPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "IdentityPoolId"
+    }
+  ],
+  "/ConfigSyncStack/BucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketName"
+    }
+  ],
+  "/ConfigSyncStack/Region": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Region"
+    }
+  ],
+  "/ConfigSyncStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/ConfigSyncStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/ConfigSyncStack/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    }
+  ],
+  "/ConfigSyncStack/StoreBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StoreBucketDA8A2FF3"
+    }
+  ],
+  "/ConfigSyncStack/AuthRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthRole900B840B"
+    }
+  ],
+  "/ConfigSyncStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/ConfigSyncStack/UserPool/CLIClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolCLIClient5EB8AFA6"
+    }
+  ],
+  "/ConfigSyncStack/StoreBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "StoreBucketPolicyD6F13803"
+    }
+  ],
+  "/ConfigSyncStack/AuthRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthRoleDefaultPolicyD77E3A7F"
+    }
+  ]
+}

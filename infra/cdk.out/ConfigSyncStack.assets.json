@@ -1,0 +1,21 @@
+{
+  "version": "53.0.0",
+  "files": {
+    "1cabf7ba45f88b9f812b1d683ae46df2f1ba6cba42978735ca9c40e9f9951e53": {
+      "displayName": "ConfigSyncStack Template",
+      "source": {
+        "path": "ConfigSyncStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "609009159737-us-east-1-aa8cbe42": {
+          "bucketName": "cdk-hnb659fds-assets-609009159737-us-east-1",
+          "objectKey": "1cabf7ba45f88b9f812b1d683ae46df2f1ba6cba42978735ca9c40e9f9951e53.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::609009159737:role/cdk-hnb659fds-file-publishing-role-609009159737-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

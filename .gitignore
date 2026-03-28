@@ -1,0 +1,10 @@
+node_modules/
+cdk.out/
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+*.js
+*.d.ts
+!cdk.json
+package-lock.json
